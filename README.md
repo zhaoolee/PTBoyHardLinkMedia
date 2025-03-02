@@ -1,6 +1,8 @@
 
 # 一个方便PT玩家节省硬盘的硬链接脚本
 
+代码仓库地址: https://github.com/zhaoolee/PTBoyHardLinkMedia
+
 
 ## 本脚本的灵感来自于树莓派挂机刷PT的应用：
 
