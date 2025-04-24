@@ -9,21 +9,21 @@ TARGET_DIRS[1]="/opt/sdb/jellyfin/Shows"
 TARGET_DIRS[2]="/opt/sdb/jellyfin/Movies"
 TARGET_DIRS[3]="/opt/sdb/jellyfin/Music"
 
-# 列出源目录中的文件夹
-folders=("$SRC_DIR"/*)
+# 列出源目录中的文件夹，并按修改时间排序
+readarray -t folders < <(find "$SRC_DIR" -maxdepth 1 -mindepth 1 -type d -printf "%T@ %p\n" | sort -n | cut -d' ' -f2-)
 if [ ${#folders[@]} -eq 0 ]; then
     echo "源目录中没有可用的文件夹。"
     exit 1
 fi
 
 # 让用户选择文件夹
-echo "请选择要硬链接的文件夹："
+PS3=$'\n请输入对应的数字序号(1, 2, 3...): '
 select folder in "${folders[@]}"; do
     if [ -n "$folder" ]; then
         echo "已选择: $folder"
         break
     else
-        echo "无效选择，请重新选择。"
+        echo "请输入正确的数字序号(1, 2, 3...)："
     fi
 done
 
